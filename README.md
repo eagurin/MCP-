@@ -1,2 +1,2 @@
 # MCP-
-MCPИСЯ = filesystem + github
+MCPИСЯ = filesystem + memory
