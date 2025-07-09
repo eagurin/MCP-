@@ -1,2 +1,2 @@
-# MCP-
-MCPИСЯ = filesystem + memory
+# MCPиСЯ
+FileSystem + OpenMemory + GraphRAG
