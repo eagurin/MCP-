@@ -19,16 +19,22 @@ jobs:
       (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pull-requests: read
-      issues: read
+      contents: write
+      pull-requests: write
+      issues: write
       id-token: write
       actions: read # Required for Claude to read CI results on PRs
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
 
       - name: Run Claude Code
         id: claude
@@ -49,16 +55,34 @@ jobs:
           # Optional: Trigger when specific user is assigned to an issue
           # assignee_trigger: "claude-bot"
           
-          # Optional: Allow Claude to run specific commands
-          # allowed_tools: "Bash(npm install),Bash(npm run build),Bash(npm run test:*),Bash(npm run lint:*)"
+          # Maximum efficiency configuration - full tool access for Python development
+          allowed_tools: |
+            Bash(python -m pytest*),
+            Bash(python -m black*),
+            Bash(python -m flake8*),
+            Bash(python -m mypy*),
+            Bash(python -m isort*),
+            Bash(pip install*),
+            Bash(python -m build*),
+            Bash(git*), Bash(ls*), Bash(cat*), Bash(grep*), Bash(find*)
           
-          # Optional: Add custom instructions for Claude to customize its behavior for your project
-          # custom_instructions: |
-          #   Follow our coding standards
-          #   Ensure all new code has tests
-          #   Use TypeScript for new files
+          # MCP-specific development instructions for maximum efficiency
+          custom_instructions: |
+            Проект MCPISIA - реализация MCP (Model Context Protocol):
+            - Следуй стандартам PEP 8 и используй type hints
+            - Поддерживай async/await паттерны везде
+            - Документируй публичные методы на русском языке
+            - Обеспечивай безопасность файловых операций (sandboxing)
+            - Тестируй успешные и ошибочные сценарии
+            - Поддерживай покрытие тестами выше 80%
+            - Валидируй входные данные и санитизируй пути
+            - Предпочитай композицию наследованию
+            - Держи код модульным и тестируемым
+            - Используй Redis как fallback для memory компонента
           
-          # Optional: Custom environment variables for Claude
-          # claude_env: |
-          #   NODE_ENV: test
+          # Environment for MCP development
+          claude_env: |
+            PYTHONPATH: /home/runner/work/MCP-/MCP-/src
+            FILESYSTEM_BASE_PATH: /tmp/mcpisia_sandbox
+            MEMORY_MAX_SIZE: 104857600
 
