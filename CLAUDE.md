@@ -95,6 +95,36 @@ Key settings:
 - Performance optimizations
 - Comprehensive logging
 
+## Claude Agent Efficiency Configuration
+
+### Maximum Performance Settings
+- **Инструменты разработки**: pytest, black, flake8, mypy, isort, coverage
+- **Языковая поддержка**: Используй русские docstrings и комментарии
+- **Фокус безопасности**: Приоритет на валидацию входных данных и sandboxing
+- **Покрытие тестами**: Минимум 80% для всех новых компонентов
+
+### MCP Protocol Requirements
+- Все tool definitions должны соответствовать MCP specification
+- Обязательная валидация schema для входящих запросов
+- Proper error codes и human-readable сообщения
+- Async/await паттерны для всех I/O операций
+
+### Security & Performance Guidelines
+- **Filesystem operations**: 
+  - Обязательный sandboxing к FILESYSTEM_BASE_PATH
+  - Валидация расширений файлов
+  - Ограничение размера файлов (FILESYSTEM_MAX_FILE_SIZE)
+- **Memory operations**:
+  - TTL управление для предотвращения memory leaks
+  - Redis fallback для persistence
+  - Мониторинг MEMORY_MAX_SIZE
+
+### Development Workflow
+- **Commits**: Используй conventional commits на русском языке
+- **Testing**: Обязательное покрытие edge cases и error scenarios
+- **Documentation**: Все публичные API документируются на русском
+- **Code Style**: Строгое соблюдение PEP 8 + type hints
+
 ## Notes for Claude
 
 - The project follows the MCP specification for tool definitions and server behavior
@@ -102,3 +132,5 @@ Key settings:
 - Always validate inputs and sanitize paths
 - Prefer composition over inheritance in component design
 - Keep the codebase modular and testable
+- Use Russian language for user-facing documentation and comments
+- Focus on defensive programming and security-first approach
