@@ -1,0 +1,27 @@
+# OpenMemory Integration PoC Requirements
+# Basic dependencies for the proof-of-concept implementation
+
+# Core libraries
+numpy>=1.21.0
+scipy>=1.7.0
+
+# Optional dependencies for enhanced functionality
+# (commented out for minimal PoC)
+
+# For production implementation, consider:
+# sentence-transformers>=2.2.0    # For better embeddings
+# chromadb>=0.3.0                # Vector database
+# fastapi>=0.68.0                # API framework
+# pydantic>=1.8.0                # Data validation
+# redis>=4.0.0                   # Caching layer
+# psycopg2-binary>=2.9.0         # PostgreSQL connection
+# asyncpg>=0.24.0                # Async PostgreSQL
+# uvicorn>=0.15.0                # ASGI server
+# python-multipart>=0.0.5       # File uploads
+# aiofiles>=0.7.0                # Async file operations
+
+# Development dependencies
+# pytest>=6.0.0                 # Testing framework
+# black>=21.0.0                 # Code formatting
+# flake8>=3.9.0                 # Linting
+# mypy>=0.910                   # Type checking
