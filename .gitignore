@@ -137,12 +137,16 @@ celerybeat.pid
 # Environments
 .env
 .envrc
-.venv
+.venv/
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Project-specific runtime files
+agent_state.json
+orchestrator.log
 
 # Spyder project settings
 .spyderproject
